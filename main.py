@@ -1,5 +1,5 @@
 from matplotlib import pyplot as plt
-import math
+import argparse
 import numpy as np
 from tabulate import tabulate
 
@@ -61,11 +61,21 @@ def euler(intMin=-4, intMax=4, dist=0.1, x0=-4, y0=2):
     plt.plot(xList[:-1], yList[:-1], 'o', color='red')
     plt.xlabel('x')
     plt.ylabel('y')
-    plt.title(f'Solucion a dy/dx = 4*math.e**(0.8*x) - 0.5*y')
+    # plt.title(f'Solucion a dy/dx = 4*math.e**(0.8*x) - 0.5*y')
     # plt.title(f'Solucion a dy/dx = np.log(y))
     # plt.title(f'Solucion a dy/dx = np.sin(x*y))
     plt.show()
 
 
 if __name__ == '__main__':
-    euler()
+    # parseador
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-min", type=float, help="limite inferior del intervalo")
+    parser.add_argument("-max", type=float, help="limite superior del intervalo")
+    parser.add_argument("-dist", type=float, help="saltos entre cada punto")
+    parser.add_argument("-x0", type=float, help="valor inicial de x")
+    parser.add_argument("-y0", type=float, help="valor inicial de y")
+    args = parser.parse_args()
+    
+    # funcion
+    euler(intMin=args.min, intMax=args.max, dist=args.dist, x0=args.x0, y0=args.y0)
